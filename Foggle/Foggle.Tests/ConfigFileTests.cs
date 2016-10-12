@@ -40,6 +40,10 @@ namespace Foggle
 			Feature.IsEnabled<TestFeature>().ShouldBeTrue();
 		}
 
+		class TestFeature : FoggleFeature
+		{
+		}
+
 	}
 
 	

@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigFileTests.cs" />
-    <Compile Include="TestFeature.cs" />
+    <Compile Include="EnableByHostnameTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
