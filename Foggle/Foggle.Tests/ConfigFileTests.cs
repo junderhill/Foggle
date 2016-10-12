@@ -17,9 +17,30 @@ namespace Foggle
 
 			Feature.IsEnabled<TestFeature>().ShouldBeFalse();
 		}
+
+		[Fact]
+		public void IsEnabled_MatchingConfigSettingSetToFalse_ReturnsFalse()
+		{
+			var mockConfig = new Mock<IConfigWrapper>();
+			mockConfig.Setup(x => x.GetApplicationSetting(It.IsAny<string>())).Returns("false");
+
+			Feature.configurationWrapper = mockConfig.Object;
+
+			Feature.IsEnabled<TestFeature>().ShouldBeFalse();
+		}
+
+		[Fact]
+		public void IsEnabled_MatchingConfigSettingSetToTrue_ReturnsTrue()
+		{
+			var mockConfig = new Mock<IConfigWrapper>();
+			mockConfig.Setup(x => x.GetApplicationSetting(It.IsAny<string>())).Returns("true");
+
+			Feature.configurationWrapper = mockConfig.Object;
+
+			Feature.IsEnabled<TestFeature>().ShouldBeTrue();
+		}
+
 	}
 
-	public class TestFeature : FoggleFeature
-	{
-	}
+	
 }
