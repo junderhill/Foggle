@@ -1,12 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Configuration;
 
 namespace Foggle
 {
-    public abstract class Feature
+    public static class Feature
     {
+        private const string Prefix = "Foggle.";
+        public static bool IsEnabled<T>() where T : FoggleFeature
+        {
+            var classname = typeof(T).Name;
+            var appSettingsKey = $"{Prefix}{classname}";
+            var configsetting = ConfigurationManager.AppSettings[appSettingsKey];
+            if (configsetting != null)
+            {
+                var enabled = false;
+                if (bool.TryParse(configsetting, out enabled))
+                {
+                    return enabled;
+                }
+            }
+            return false;
+        }
+        
     }
 }
