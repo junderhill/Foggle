@@ -4,12 +4,29 @@ namespace Foggle
 {
     public static class Feature
     {
-        private const string Prefix = "Foggle.";
+		private static IConfigWrapper _configurationWrapper;
+		internal static IConfigWrapper configurationWrapper
+		{
+			get
+			{
+				if (_configurationWrapper == null)
+				{
+					_configurationWrapper = new ConfigurationWrapper();
+				}
+				return _configurationWrapper;
+			}
+			set
+			{
+				_configurationWrapper = value;
+			}
+		}
+
+		private const string Prefix = "Foggle.";
         public static bool IsEnabled<T>() where T : FoggleFeature
         {
             var classname = typeof(T).Name;
             var appSettingsKey = $"{Prefix}{classname}";
-            var configsetting = ConfigurationManager.AppSettings[appSettingsKey];
+			var configsetting = configurationWrapper.GetApplicationSetting(appSettingsKey);
             if (configsetting != null)
             {
                 var enabled = false;
