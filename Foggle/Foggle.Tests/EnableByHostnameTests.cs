@@ -16,7 +16,7 @@ namespace Foggle
 			Feature.IsEnabled<TestFeature>().ShouldBeFalse();
 
 			mockConfig.Verify(x => x.GetApplicationSetting(It.Is<string>(s => s.EndsWith("Hostnames"))));
- 		}
+		}
 
 		[FoggleByHostname]
 		class TestFeature : FoggleFeature
