@@ -13,7 +13,7 @@ namespace Foggle
 			var mockConfig = new Mock<IConfigWrapper>();
 
 			Feature.configurationWrapper = mockConfig.Object;
-			Feature.IsEnabled<TestFeature>().ShouldBeFalse();
+			Feature.IsEnabled<TestHostnameFeature>().ShouldBeFalse();
 
 			mockConfig.Verify(x => x.GetApplicationSetting(It.Is<string>(s => s.EndsWith("Hostnames"))));
 		}
@@ -24,7 +24,7 @@ namespace Foggle
 			var mockConfig = new Mock<IConfigWrapper>();
 
 			Feature.configurationWrapper = mockConfig.Object;
-			Feature.IsEnabled<TestFeature>();
+			Feature.IsEnabled<TestHostnameFeature>();
 
 			mockConfig.Verify(x => x.GetCurrentHostname(), Times.Once);
 		}
@@ -35,7 +35,7 @@ namespace Foggle
 			var mockConfig = new Mock<IConfigWrapper>();
 
 			Feature.configurationWrapper = mockConfig.Object;
-			Feature.IsEnabled<TestFeature>();
+			Feature.IsEnabled<TestHostnameFeature>();
 
 			mockConfig.Verify(x => x.GetCurrentHostname(), Times.Once);
 		}
@@ -44,7 +44,7 @@ namespace Foggle
 
 
 		[FoggleByHostname]
-		class TestFeature : FoggleFeature
+		class TestHostnameFeature : FoggleFeature
 		{
 
 		}
