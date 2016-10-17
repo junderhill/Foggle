@@ -8,5 +8,10 @@ namespace Foggle
 		{
 			throw new NotImplementedException();
 		}
+
+		public string GetCurrentHostname()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

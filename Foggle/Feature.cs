@@ -35,6 +35,7 @@ namespace Foggle
 		        if (a.GetType() == typeof(FoggleByHostnameAttribute))
 		        {
 		            var hostnames = configurationWrapper.GetApplicationSetting($"{appSettingsKey}.Hostnames");
+					var currentHostname = configurationWrapper.GetCurrentHostname();
 		        }
 		    }
 
