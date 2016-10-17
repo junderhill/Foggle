@@ -5,6 +5,7 @@ using Should;
 
 namespace Foggle
 {
+	[Collection("Feature Tests")]
 	public class EnableByHostnameTests
 	{
 		[Fact]
