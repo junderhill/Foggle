@@ -1,5 +1,7 @@
 # Foggle 
+master:
 [![Build status](https://ci.appveyor.com/api/projects/status/uuthgll2ji9q2h1n/branch/master?svg=true)](https://ci.appveyor.com/project/junderhill/foggle/branch/master)
+develop:
 [![Build status](https://ci.appveyor.com/api/projects/status/uuthgll2ji9q2h1n/branch/develop?svg=true)](https://ci.appveyor.com/project/junderhill/foggle/branch/develop)
 
 
