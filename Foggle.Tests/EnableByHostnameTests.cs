@@ -14,7 +14,7 @@ namespace Foggle
 			var mockConfig = new Mock<IConfigWrapper>();
 
 			Feature.configurationWrapper = mockConfig.Object;
-			Feature.IsEnabled<TestHostnameFeature>().ShouldBeFalse();
+			Feature.IsEnabled<TestHostnameFeature>();
 
 			mockConfig.Verify(x => x.GetApplicationSetting(It.Is<string>(s => s.EndsWith("Hostnames"))));
 		}
@@ -31,18 +31,26 @@ namespace Foggle
 		}
 
 		[Fact]
-		public void IsEnabledByHostName_HostnameInList_ReturnsTrue()
+		public void IsEnabledByHostName_OnlyHostnameInList_ReturnsTrue()
 		{
 			var mockConfig = new Mock<IConfigWrapper>();
-
+			mockConfig.Setup(s => s.GetCurrentHostname()).Returns("MY-COMPUTER");
+			mockConfig.Setup(x => x.GetApplicationSetting(It.Is<string>(s => s.EndsWith("Hostnames")))).Returns("MY-COMPUTER");
 			Feature.configurationWrapper = mockConfig.Object;
-			Feature.IsEnabled<TestHostnameFeature>();
 
-			mockConfig.Verify(x => x.GetCurrentHostname(), Times.Once);
+			Feature.IsEnabled<TestHostnameFeature>().ShouldBeTrue();
 		}
 
+		[Fact]
+		public void IsEnabledByHostName_OneDifferentHostnameInList_ReturnsFalse()
+		{
+			var mockConfig = new Mock<IConfigWrapper>();
+			mockConfig.Setup(s => s.GetCurrentHostname()).Returns("MY-COMPUTER");
+			mockConfig.Setup(x => x.GetApplicationSetting(It.Is<string>(s => s.EndsWith("Hostnames")))).Returns("DAVEPC");
+			Feature.configurationWrapper = mockConfig.Object;
 
-
+			Feature.IsEnabled<TestHostnameFeature>().ShouldBeFalse();
+		}
 
 		[FoggleByHostname]
 		class TestHostnameFeature : FoggleFeature

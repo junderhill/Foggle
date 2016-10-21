@@ -32,11 +32,10 @@ namespace Foggle
 
 		    foreach (var a in attr)
 		    {
-		        if (a.GetType() == typeof(FoggleByHostnameAttribute))
-		        {
-		            var hostnames = configurationWrapper.GetApplicationSetting($"{appSettingsKey}.Hostnames");
-					var currentHostname = configurationWrapper.GetCurrentHostname();
-		        }
+				if (a.GetType() == typeof(FoggleByHostnameAttribute))
+				{
+					return IsEnabledByHostname(appSettingsKey);
+				}
 		    }
 
 			var configsetting = configurationWrapper.GetApplicationSetting(appSettingsKey);
@@ -50,6 +49,18 @@ namespace Foggle
 			}
 			return false;
 		}
-		
+
+		private static bool IsEnabledByHostname(string appSettingsKey)
+		{
+			var hostnames = configurationWrapper.GetApplicationSetting($"{appSettingsKey}.Hostnames");
+			var currentHostname = configurationWrapper.GetCurrentHostname();
+
+			if (hostnames == currentHostname)
+			{
+				return true;
+			}
+			return false;
+		}
+
 	}
 }
