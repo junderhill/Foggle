@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FoggleException.cs" />
     <Compile Include="FoggleFeature.cs" />
     <Compile Include="Feature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -52,6 +52,17 @@ namespace Foggle
 			Feature.IsEnabled<TestHostnameFeature>().ShouldBeFalse();
 		}
 
+		[Fact]
+		public void IsEnabledByHostName_HostnameInPipeDelimitedList_ReturnsTrue()
+		{
+			var mockConfig = new Mock<IConfigWrapper>();
+			mockConfig.Setup(s => s.GetCurrentHostname()).Returns("MY-COMPUTER");
+			mockConfig.Setup(x => x.GetApplicationSetting(It.Is<string>(s => s.EndsWith("Hostnames")))).Returns("STEVEPC|MY-COMPUTER|DAVEPC");
+			Feature.configurationWrapper = mockConfig.Object;
+
+			Feature.IsEnabled<TestHostnameFeature>().ShouldBeTrue();
+		}
+
 		[FoggleByHostname]
 		class TestHostnameFeature : FoggleFeature
 		{

@@ -1,5 +1,6 @@
 using System;
 using System.Configuration;
+using System.Linq;
 
 namespace Foggle
 {
@@ -55,11 +56,19 @@ namespace Foggle
 			var hostnames = configurationWrapper.GetApplicationSetting($"{appSettingsKey}.Hostnames");
 			var currentHostname = configurationWrapper.GetCurrentHostname();
 
-			if (hostnames == currentHostname)
+			if (hostnames == null)
 			{
-				return true;
+				return false;
 			}
-			return false;
+
+			if (currentHostname == null)
+			{
+				throw new FoggleException("Unable to get the hostname for current machine");
+			}
+
+			var enabledHosts = hostnames.Split(new []{'|'}, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+			return enabledHosts.Contains(currentHostname);
 		}
 
 	}
