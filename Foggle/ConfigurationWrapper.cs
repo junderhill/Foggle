@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 
 namespace Foggle
 {
@@ -6,12 +7,26 @@ namespace Foggle
 	{
 		public string GetApplicationSetting(string key)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				return ConfigurationManager.AppSettings[key];
+			}
+			catch (Exception ex)
+			{
+				return string.Empty;
+			}
 		}
 
 		public string GetCurrentHostname()
 		{
-			throw new NotImplementedException();
+			try
+			{
+				return System.Net.Dns.GetHostName();
+			}
+			catch (Exception ex)
+			{
+				return null;
+			}
 		}
 	}
 }

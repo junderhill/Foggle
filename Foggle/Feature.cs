@@ -39,6 +39,11 @@ namespace Foggle
 				}
 		    }
 
+			return IsEnabledInConfig<T>(appSettingsKey);
+		}
+
+		private static bool IsEnabledInConfig<T>(string appSettingsKey) where T : FoggleFeature
+		{
 			var configsetting = configurationWrapper.GetApplicationSetting(appSettingsKey);
 			if (configsetting != null)
 			{
