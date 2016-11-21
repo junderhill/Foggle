@@ -5,6 +5,7 @@ using Should;
 
 namespace Foggle
 {
+	[Collection("Feature Tests")]
 	public class ConfigFileTests
 	{
 		[Fact]
@@ -30,7 +31,7 @@ namespace Foggle
 		}
 
 		[Fact]
-		public void IsEnabled_MatchingConfigSettingSetToTrue_ReturnsTrue()
+		public void IsEnabled_MatchingConfigSettingSetToLowerCaseTrue_ReturnsTrue()
 		{
 			var mockConfig = new Mock<IConfigWrapper>();
 			mockConfig.Setup(x => x.GetApplicationSetting(It.IsAny<string>())).Returns("true");
@@ -38,6 +39,32 @@ namespace Foggle
 			Feature.configurationWrapper = mockConfig.Object;
 
 			Feature.IsEnabled<TestFeature>().ShouldBeTrue();
+		}
+
+		[Fact]
+		public void IsEnabled_MatchingConfigSettingSetToCaptialTrue_ReturnsTrue()
+		{
+			var mockConfig = new Mock<IConfigWrapper>();
+			mockConfig.Setup(x => x.GetApplicationSetting(It.IsAny<string>())).Returns("TRUE");
+
+			Feature.configurationWrapper = mockConfig.Object;
+
+			Feature.IsEnabled<TestFeature>().ShouldBeTrue();
+		}
+
+		[Fact]
+		public void IsEnabled_MatchingConfigSettingSetToCanelCaseTrue_ReturnsTrue()
+		{
+			var mockConfig = new Mock<IConfigWrapper>();
+			mockConfig.Setup(x => x.GetApplicationSetting(It.IsAny<string>())).Returns("True");
+
+			Feature.configurationWrapper = mockConfig.Object;
+
+			Feature.IsEnabled<TestFeature>().ShouldBeTrue();
+		}
+
+		class TestFeature : FoggleFeature
+		{
 		}
 
 	}
