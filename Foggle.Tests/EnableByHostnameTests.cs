@@ -63,6 +63,7 @@ namespace Foggle
 			Feature.IsEnabled<TestHostnameFeature>().ShouldBeTrue();
 		}
 
+
 		[FoggleByHostname]
 		class TestHostnameFeature : FoggleFeature
 		{

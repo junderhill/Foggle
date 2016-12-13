@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Foggle
 {
@@ -73,7 +75,28 @@ namespace Foggle
 
 			var enabledHosts = hostnames.Split(new []{'|'}, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-			return enabledHosts.Contains(currentHostname);
+			if (currentHostname.MatchesAnyOfThe(enabledHosts))
+			{
+				return true;
+			}
+			return false;
+		}
+
+		private static bool MatchesAnyOfThe(this string hostname, List<string> enabledHosts)
+		{
+			foreach (var h in enabledHosts)
+			{
+				if (hostname == h)
+				{
+					return true;
+				}
+				Regex r = new Regex($"^{h.Replace("*", ".+")}$");
+				if (r.IsMatch(hostname))
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 
 	}
