@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jason Underhill")]
 [assembly: AssemblyProduct("Foggle")]
-[assembly: AssemblyCopyright("Copyright © Jason Underhill 2016")]
+[assembly: AssemblyCopyright("Copyright © Jason Underhill 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: InternalsVisibleTo("Foggle.Tests")]

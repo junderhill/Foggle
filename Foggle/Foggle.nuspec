@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>JasonUnderhill.Foggle</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Jason Underhill</authors>
+    <owners>Jason Underhill</owners>
+    <licenseUrl>https://raw.githubusercontent.com/junderhill/Foggle/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/junderhill/Foggle</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Added support for toggling features by hostnames.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>feature toggle switch foggle feature-tggle configuration cd continuous-delivery continuous delivery branch merge</tags>
+  </metadata>
+</package>
